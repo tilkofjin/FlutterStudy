@@ -15,7 +15,7 @@ class HttpRequest {
   HttpRequest._internal() {
     // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     if (dio == null) {
-      print('dio:$dio');
+      print('dio---------:$dio');
       BaseOptions baseOptions = BaseOptions(
         baseUrl: HttpOptions.BASE_URL,
         connectTimeout: HttpOptions.CONNECT_TIMEOUT,
