@@ -6,8 +6,21 @@ final ThemeData themeData = ThemeData(
     primaryColor: AppColors.primary, //页面背景色
     splashColor: Colors.transparent, //取消水波纹效果
     highlightColor: Colors.transparent, //取消水波纹效果
+    indicatorColor: AppColors.active,
     // 未选中样式时的默认文字颜色
     textTheme: TextTheme(bodyText2: TextStyle(color: AppColors.unactive)),
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.nav,
+      elevation: 0,
+    ),
+    tabBarTheme: TabBarTheme(
+        unselectedLabelColor: AppColors.unactive,
+        indicatorSize: TabBarIndicatorSize.label, //  滑块大小根据文字来定
+        labelStyle: TextStyle(
+          //选中时滑块的文字大小
+          fontSize: 18,
+        ),
+        labelPadding: EdgeInsets.symmetric(horizontal: 12)),
     //底部按钮
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColors.nav,
