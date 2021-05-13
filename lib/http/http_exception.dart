@@ -24,27 +24,27 @@ class HttpException implements Exception {
         return HttpException(code: -1, msg: '响应超时');
       case DioErrorType.response:
         // 服务器异常
-        int? statusCode = error.response?.statusCode;
+        int statusCode = error.response!.statusCode!;
         switch (statusCode) {
           case 400:
-            return HttpException(code: statusCode!, msg: '请求语法错误');
+            return HttpException(code: statusCode, msg: '请求语法错误');
           case 401:
-            return HttpException(code: statusCode!, msg: '没有权限');
+            return HttpException(code: statusCode, msg: '没有权限');
           case 403:
-            return HttpException(code: statusCode!, msg: '服务器拒绝执行');
+            return HttpException(code: statusCode, msg: '服务器拒绝执行');
           case 404:
-            return HttpException(code: statusCode!, msg: '无法连接服务器');
+            return HttpException(code: statusCode, msg: '无法连接服务器');
           case 500:
-            return HttpException(code: statusCode!, msg: '服务器内部错误');
+            return HttpException(code: statusCode, msg: '服务器内部错误');
           case 502:
-            return HttpException(code: statusCode!, msg: '无效的请求');
+            return HttpException(code: statusCode, msg: '无效的请求');
           case 503:
-            return HttpException(code: statusCode!, msg: '服务器挂了');
+            return HttpException(code: statusCode, msg: '服务器挂了');
           case 505:
-            return HttpException(code: statusCode!, msg: '不支持HTTP协议请求');
+            return HttpException(code: statusCode, msg: '不支持HTTP协议请求');
           default:
             return HttpException(
-              code: statusCode!,
+              code: statusCode,
               msg: error.response!.statusMessage!,
             );
         }

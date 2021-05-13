@@ -10,12 +10,18 @@ class HttpRequest {
   // 初始化一个单例实例
   static final HttpRequest _instance = HttpRequest._internal();
   // dio 实例
-  Dio? dio;
+  var dio;
+  /*
+   * 取消请求
+   * 同一个cancel token 可以用于多个请求
+   * 当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
+   * 所以参数可选
+   */
+  CancelToken _cancelToken = new CancelToken();
   // 内部构造方法
   HttpRequest._internal() {
-    // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     if (dio == null) {
-      print('dio---------:$dio');
+      // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
       BaseOptions baseOptions = BaseOptions(
         baseUrl: HttpOptions.BASE_URL,
         connectTimeout: HttpOptions.CONNECT_TIMEOUT,
@@ -24,9 +30,8 @@ class HttpRequest {
       );
       // 没有实例 则创建之
       dio = new Dio(baseOptions);
-
       // 添加拦截器
-      dio?.interceptors.add(HttpInterceptor());
+      dio.interceptors.add(HttpInterceptor());
     }
   }
 
@@ -44,28 +49,20 @@ class HttpRequest {
     Map<String, dynamic>? headers,
     List<Interceptor>? interceptors,
   }) {
-    dio!.options.baseUrl = baseUrl!;
-    dio!.options.connectTimeout = connectTimeout!;
-    dio!.options.receiveTimeout = receiveTimeout!;
-    dio!.options.headers = headers;
+    dio.options.baseUrl = baseUrl!;
+    dio.options.connectTimeout = connectTimeout!;
+    dio.options.receiveTimeout = receiveTimeout!;
+    dio.options.headers = headers;
     if (interceptors != null && interceptors.isNotEmpty) {
-      dio!.interceptors..addAll(interceptors);
+      dio.interceptors.addAll(interceptors);
     }
   }
 
   /// 设置请求头
   void setHeaders(Map<String, dynamic> headers) {
-    dio!.options.headers.addAll(headers);
+    dio.options.headers.addAll(headers);
   }
 
-  CancelToken _cancelToken = new CancelToken();
-  /*
-   * 取消请求
-   *
-   * 同一个cancel token 可以用于多个请求
-   * 当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
-   * 所以参数可选
-   */
   void cancelRequests({CancelToken? token}) {
     token ?? _cancelToken.cancel("cancelled");
   }
@@ -73,7 +70,9 @@ class HttpRequest {
   /// 设置鉴权请求头
   Options setAuthorizationHeader(Options requestOptions) {
     String? _token;
-    requestOptions.headers!['token'] = _token;
+    if (_token != null) {
+      requestOptions.headers!['token'] = _token;
+    }
     return requestOptions;
   }
 
@@ -84,13 +83,13 @@ class HttpRequest {
     Options? options,
     CancelToken? cancelToken,
   }) async {
-    Options requestOptions = setAuthorizationHeader(options!);
+    Options requestOptions = setAuthorizationHeader(options ?? Options());
 
-    Response response = await dio!.get(
+    Response response = await dio.get(
       path,
       queryParameters: params,
       options: requestOptions,
-      cancelToken: cancelToken,
+      cancelToken: cancelToken ?? _cancelToken,
     );
     return response.data;
   }
@@ -105,12 +104,12 @@ class HttpRequest {
   }) async {
     Options requestOptions = setAuthorizationHeader(options ?? Options());
 
-    Response response = await dio!.post(
+    Response response = await dio.post(
       path,
       data: data,
       queryParameters: params,
       options: requestOptions,
-      cancelToken: cancelToken ?? _cancelToken,
+      cancelToken: cancelToken,
     );
     return response.data;
   }
@@ -124,11 +123,11 @@ class HttpRequest {
   }) async {
     Options requestOptions = setAuthorizationHeader(options ?? Options());
 
-    Response response = await dio!.post(
+    Response response = await dio.post(
       path,
       data: FormData.fromMap(params!),
       options: requestOptions,
-      cancelToken: cancelToken ?? _cancelToken,
+      cancelToken: cancelToken,
     );
     return response.data;
   }

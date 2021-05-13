@@ -18,11 +18,11 @@ class Http {
     List<Interceptor>? interceptors,
   }) {
     HttpRequest().init(
-      baseUrl: baseUrl,
-      connectTimeout: connectTimeout,
-      receiveTimeout: receiveTimeout,
-      headers: headers,
-      interceptors: interceptors,
+      baseUrl: baseUrl!,
+      connectTimeout: connectTimeout!,
+      receiveTimeout: receiveTimeout!,
+      headers: headers!,
+      interceptors: interceptors!,
     );
   }
 
@@ -61,10 +61,10 @@ class Http {
   }) async {
     return await HttpRequest().post(
       path,
-      params: params,
+      params: params!,
       data: data,
-      options: options,
-      cancelToken: cancelToken,
+      options: options!,
+      cancelToken: cancelToken!,
     );
   }
 
@@ -77,9 +77,9 @@ class Http {
   }) async {
     return await HttpRequest().postForm(
       path,
-      params: params,
-      options: options,
-      cancelToken: cancelToken,
+      params: params!,
+      options: options!,
+      cancelToken: cancelToken!,
     );
   }
 }

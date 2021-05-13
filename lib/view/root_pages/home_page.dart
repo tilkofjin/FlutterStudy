@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Future getList() async {
     try {
-      final result = Http.get(
+      final result = await Http.get(
         '/api/song/info/2',
       );
       print(result);
