@@ -1,5 +1,5 @@
 import 'package:fluter_demo/components/root_page_head.dart';
-import 'package:fluter_demo/http/http.dart';
+import 'package:fluter_demo/view/sub_pages/song_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +31,7 @@ const List<Tab> _tabs = [
 ];
 
 final List<Widget> _tabsContent = [
-  Text('datadata'),
+  SongPage(),
   Text('datadata'),
   Text('datadata'),
   Text('datadata'),
@@ -49,22 +49,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _tabController =
         TabController(initialIndex: 1, length: _tabs.length, vsync: this);
 
-    getList();
     // 监听切换tab
     // _tabController.addListener(() {
     //   _tabController.index;
     // });
-  }
-
-  Future getList() async {
-    try {
-      final result = await Http.get(
-        '/api/song/info/2',
-      );
-      print(result);
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override
