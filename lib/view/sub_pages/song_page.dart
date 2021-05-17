@@ -24,18 +24,17 @@ class _SongPageState extends State<SongPage> {
   @override
   void initState() {
     super.initState();
-    getList();
-    // _getSongs();
+    _getSongs();
   }
 
-  Future getList() async {
-    try {
-      final result = await SongService.getSongs(page: page, limit: limit);
-      print(result);
-    } catch (e) {
-      print(e);
-    }
-  }
+  // Future getList() async {
+  //   try {
+  //     final result = await SongService.getSongs();
+  //     print(result);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   // 获取数据
   Future _getSongs({bool isPush = false}) async {
@@ -74,7 +73,6 @@ class _SongPageState extends State<SongPage> {
         return Container(
           height: 30,
           color: Colors.black.withOpacity(index / 10),
-          child: Text('data'),
         );
       },
     );

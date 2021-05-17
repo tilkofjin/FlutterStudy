@@ -12,7 +12,6 @@ class SongService {
         await Http.post(listPath, data: {'page': page, 'limit': limit});
 
     Map<String, dynamic> result = response['page'];
-    print(result);
     return result;
   }
 }
