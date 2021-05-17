@@ -49,9 +49,9 @@ class HttpRequest {
     Map<String, dynamic>? headers,
     List<Interceptor>? interceptors,
   }) {
-    dio.options.baseUrl = baseUrl!;
-    dio.options.connectTimeout = connectTimeout!;
-    dio.options.receiveTimeout = receiveTimeout!;
+    dio.options.baseUrl = baseUrl;
+    dio.options.connectTimeout = connectTimeout;
+    dio.options.receiveTimeout = receiveTimeout;
     dio.options.headers = headers;
     if (interceptors != null && interceptors.isNotEmpty) {
       dio.interceptors.addAll(interceptors);

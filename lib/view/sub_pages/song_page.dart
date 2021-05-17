@@ -1,4 +1,4 @@
-import 'package:fluter_demo/http/http.dart';
+import 'package:fluter_demo/components/song_card.dart';
 import 'package:fluter_demo/models/song_model.dart';
 import 'package:fluter_demo/services/song_service.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +26,6 @@ class _SongPageState extends State<SongPage> {
     super.initState();
     _getSongs();
   }
-
-  // Future getList() async {
-  //   try {
-  //     final result = await SongService.getSongs();
-  //     print(result);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   // 获取数据
   Future _getSongs({bool isPush = false}) async {
@@ -70,9 +61,15 @@ class _SongPageState extends State<SongPage> {
     return ListView.builder(
       itemCount: _songList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          height: 30,
-          color: Colors.black.withOpacity(index / 10),
+        return Column(
+          children: [
+            SizedBox(
+              height: 16,
+            ),
+            SongCard(
+              songItem: _songList[index],
+            ),
+          ],
         );
       },
     );
