@@ -1,4 +1,5 @@
 import 'package:fluter_demo/config/app_colors.dart';
+import 'package:fluter_demo/utils/util.dart';
 import 'package:flutter/material.dart';
 
 class CommentLikeRead extends StatelessWidget {
@@ -27,15 +28,15 @@ class CommentLikeRead extends StatelessWidget {
         children: [
           Image.asset(
             icon,
-            width: 14,
-            height: 14,
+            width: 18,
+            height: 18,
           ),
           SizedBox(
             width: 4,
           ),
           Expanded(
             child: Text(
-              count.toString(),
+              formatCharCount(count),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

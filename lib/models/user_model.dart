@@ -1,4 +1,16 @@
-// 用户列表每项和详情模型
+// 用户列表模型
+class UserList {
+  // 包含 SongList 模型的集合
+  final List<UserItem> list;
+
+  UserList(this.list);
+
+  // 循环后台返回的数据，将每项数据组装成 UserItem
+  factory UserList.fromJson(List<dynamic> list) {
+    return UserList(list.map((item) => UserItem.fromJson(item)).toList());
+  }
+}
+
 class UserItem {
   final int id;
   final String coverPictureUrl;

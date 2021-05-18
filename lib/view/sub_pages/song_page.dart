@@ -64,7 +64,7 @@ class _SongPageState extends State<SongPage> {
         return Column(
           children: [
             SizedBox(
-              height: 16,
+              height: 8,
             ),
             SongCard(
               songItem: _songList[index],

@@ -1,4 +1,5 @@
 import 'package:fluter_demo/config/app_colors.dart';
+import 'package:fluter_demo/utils/user_type.dart';
 import 'package:flutter/material.dart';
 
 class AvaterRoleName extends StatelessWidget {
@@ -29,11 +30,11 @@ class AvaterRoleName extends StatelessWidget {
       margin: EdgeInsets.only(left: 6),
       padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: UserType.fromColor(type),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
-        type ?? '未知',
+        UserType.fromCn(type),
         style: TextStyle(
           color: Colors.white,
           fontSize: 10,
