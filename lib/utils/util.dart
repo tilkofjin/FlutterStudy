@@ -7,7 +7,7 @@ double toRpx(BuildContext context, double size) {
 }
 
 String formatCharCount(int count) {
-  if (count == null || count <= 0 || count.isNaN) {
+  if (count <= 0 || count.isNaN) {
     return '0';
   }
   String strCount = count.toString();

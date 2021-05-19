@@ -36,6 +36,6 @@ class UserItem {
         nickname: item['nickname'],
         type: item['type'],
         musicCount: item['musicCount'],
-        musicPlayCount: item['musicPlayCount']);
+        musicPlayCount: item['musicPlayCount']); //UserItem
   }
 }

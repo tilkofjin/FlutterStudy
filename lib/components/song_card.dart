@@ -95,6 +95,7 @@ class SongCard extends StatelessWidget {
                       avater: songItem!.user.coverPictureUrl,
                       nickname: songItem!.user.nickname,
                       showType: false,
+                      avatarSize: 20,
                       // type: 'ADMIN',
                     ),
                   ),

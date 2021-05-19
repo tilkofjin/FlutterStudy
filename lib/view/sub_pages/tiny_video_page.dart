@@ -1,20 +1,20 @@
-import 'package:fluter_demo/components/song_card.dart';
-import 'package:fluter_demo/models/song_model.dart';
-import 'package:fluter_demo/services/song_service.dart';
+import 'package:fluter_demo/components/tiny_video_card.dart';
+import 'package:fluter_demo/models/video_model.dart';
+import 'package:fluter_demo/services/video_service.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 
-class SongPage extends StatefulWidget {
-  SongPage({Key? key}) : super(key: key);
+class TinyVideoPage extends StatefulWidget {
+  TinyVideoPage({Key? key}) : super(key: key);
 
   @override
-  _SongPageState createState() => _SongPageState();
+  _TinyVideoPageState createState() => _TinyVideoPageState();
 }
 
-class _SongPageState extends State<SongPage>
+class _TinyVideoPageState extends State<TinyVideoPage>
     with AutomaticKeepAliveClientMixin {
-  // 初始化songlist模型
-  List<SongItem> _songList = SongList([]).list;
+  // 初始化 userList 模型
+  List<VideoItem> _videoList = VideoList([]).list;
   late EasyRefreshController _easyRefreshController;
 
   int page = 1;
@@ -27,25 +27,25 @@ class _SongPageState extends State<SongPage>
   @override
   void initState() {
     super.initState();
-    _getSongs();
     _easyRefreshController = EasyRefreshController();
+    _getVideos();
   }
 
   // 获取数据
-  Future _getSongs({bool isPush = false}) async {
+  Future _getVideos({bool isPush = false}) async {
     try {
       // 获取数据
-      Map<String, dynamic> result = await SongService.getSongs(page: page);
+      Map<String, dynamic> result = await VideoService.getVideos(page: page);
       print(result);
       // 将数据转为实体类
-      SongList songListModel = SongList.fromJson(result['data']);
+      VideoList videoListModel = VideoList.fromJson(result['data']);
       setState(() {
         hasMore = page * limit < result['total'];
         page++;
         if (isPush) {
-          _songList.addAll(songListModel.list);
+          _videoList.addAll(videoListModel.list);
         } else {
-          _songList = songListModel.list;
+          _videoList = videoListModel.list;
         }
       });
     } catch (err) {
@@ -63,7 +63,7 @@ class _SongPageState extends State<SongPage>
   // 下拉刷新
   Future _onRefresh() async {
     page = 1;
-    await _getSongs(isPush: true);
+    await _getVideos(isPush: true);
     // 完成刷新
     _easyRefreshController.finishRefresh();
     // 重置加载状态
@@ -73,7 +73,7 @@ class _SongPageState extends State<SongPage>
 // 上拉加载
   Future _onLoad() async {
     if (hasMore) {
-      await _getSongs(isPush: true);
+      await _getVideos(isPush: true);
     }
     // 完成加载
     _easyRefreshController.finishLoad(noMore: !hasMore);
@@ -90,22 +90,32 @@ class _SongPageState extends State<SongPage>
       footer: ClassicalFooter(),
       enableControlFinishLoad: true,
       enableControlFinishRefresh: true,
-      child: ListView.builder(
-        itemCount: _songList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              SizedBox(
-                height: 8,
-              ),
-              SongCard(
-                songItem: _songList[index],
-              ),
-            ],
-          );
-        },
-      ),
+      child: _buildBody(),
     );
+  }
+
+  Widget _buildBody() {
+    return GridView.builder(
+        itemCount: _videoList.length,
+        padding: EdgeInsets.only(top: 8),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8, //上下间距
+          crossAxisSpacing: 1, //左右间距
+          childAspectRatio: 1 / 2,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          bool isEven = index.isEven;
+          double pl = isEven ? 18 : 9;
+          double pr = isEven ? 9 : 18;
+          return Container(
+            padding: EdgeInsets.only(top: 10, left: pl, right: pr),
+            color: Colors.white,
+            child: TinyVideoCard(
+              videoItem: _videoList[index],
+            ),
+          );
+        });
   }
 
   @override

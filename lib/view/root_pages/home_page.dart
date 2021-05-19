@@ -1,5 +1,7 @@
 import 'package:fluter_demo/components/root_page_head.dart';
+import 'package:fluter_demo/view/sub_pages/singer_page.dart';
 import 'package:fluter_demo/view/sub_pages/song_page.dart';
+import 'package:fluter_demo/view/sub_pages/tiny_video_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,8 +35,8 @@ const List<Tab> _tabs = [
 final List<Widget> _tabsContent = [
   SongPage(),
   Text('datadata'),
-  Text('datadata'),
-  Text('datadata'),
+  SingerPage(),
+  TinyVideoPage(),
   Text('datadata'),
   Text('datadata')
 ];

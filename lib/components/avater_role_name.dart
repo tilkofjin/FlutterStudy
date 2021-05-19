@@ -7,8 +7,15 @@ class AvaterRoleName extends StatelessWidget {
   final String? nickname;
   final String? type;
   final bool showType;
+  final double avatarSize;
+
   const AvaterRoleName(
-      {Key? key, this.avater, this.nickname, this.showType = true, this.type})
+      {Key? key,
+      this.avater,
+      this.nickname,
+      this.showType = true,
+      this.type,
+      this.avatarSize = 25})
       : super(key: key);
 
   @override
@@ -45,8 +52,8 @@ class AvaterRoleName extends StatelessWidget {
 
   Widget _avater() {
     return SizedBox(
-      width: 20,
-      height: 20,
+      width: avatarSize,
+      height: avatarSize,
       child: ClipOval(
         child: FadeInImage.assetNetwork(
             placeholder: 'assets/images/common/lazy-1.png', image: avater!),
