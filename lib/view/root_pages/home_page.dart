@@ -1,4 +1,5 @@
 import 'package:fluter_demo/components/root_page_head.dart';
+import 'package:fluter_demo/view/sub_pages/article_page.dart';
 import 'package:fluter_demo/view/sub_pages/singer_page.dart';
 import 'package:fluter_demo/view/sub_pages/song_page.dart';
 import 'package:fluter_demo/view/sub_pages/tiny_video_page.dart';
@@ -37,7 +38,7 @@ final List<Widget> _tabsContent = [
   Text('datadata'),
   SingerPage(),
   TinyVideoPage(),
-  Text('datadata'),
+  ArticlePage(),
   Text('datadata')
 ];
 

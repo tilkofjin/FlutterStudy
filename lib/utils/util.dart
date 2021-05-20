@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 // rpx转换
@@ -18,4 +19,10 @@ String formatCharCount(int count) {
     return preFix;
   }
   return strCount;
+}
+
+// 随机获取指定范围内的值
+int getRandomRangeInt(int min, int max) {
+  final Random random = new Random();
+  return min + random.nextInt(max + 1 - min);
 }
