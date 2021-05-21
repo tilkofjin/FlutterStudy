@@ -69,7 +69,7 @@ class VideoCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
