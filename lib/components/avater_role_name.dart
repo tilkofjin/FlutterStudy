@@ -71,7 +71,8 @@ class AvaterRoleName extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: AppColors.unactive,
-            fontSize: 14,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

@@ -37,6 +37,7 @@ dev_dependencies:
   dio: ^4.0.0
   # 下拉刷新插件
   flutter_easyrefresh: ^2.2.1
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

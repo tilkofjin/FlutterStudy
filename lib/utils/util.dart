@@ -26,3 +26,11 @@ int getRandomRangeInt(int min, int max) {
   final Random random = new Random();
   return min + random.nextInt(max + 1 - min);
 }
+
+// 时间转换为时分秒
+String getDurationTime(Duration duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, "0"); // 字符串是否为 2 位，不够向左补 0
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+}

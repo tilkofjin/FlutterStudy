@@ -25,6 +25,7 @@ class CommentLikeRead extends StatelessWidget {
   Widget _iconText(String icon, int count) {
     return Expanded(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
             icon,
@@ -32,7 +33,7 @@ class CommentLikeRead extends StatelessWidget {
             height: 18,
           ),
           SizedBox(
-            width: 4,
+            width: 3,
           ),
           Expanded(
             child: Text(

@@ -3,6 +3,7 @@ import 'package:fluter_demo/view/sub_pages/article_page.dart';
 import 'package:fluter_demo/view/sub_pages/singer_page.dart';
 import 'package:fluter_demo/view/sub_pages/song_page.dart';
 import 'package:fluter_demo/view/sub_pages/tiny_video_page.dart';
+import 'package:fluter_demo/view/sub_pages/video_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,7 +40,7 @@ final List<Widget> _tabsContent = [
   SingerPage(),
   TinyVideoPage(),
   ArticlePage(),
-  Text('datadata')
+  VideoPage(),
 ];
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
