@@ -1,3 +1,4 @@
+import 'package:fluter_demo/models/recommend_interface.dart';
 import 'package:fluter_demo/models/user_model.dart';
 import 'user_model.dart';
 
@@ -14,7 +15,7 @@ class SongList {
 }
 
 // 歌曲每项 - 详情模型
-class SongItem {
+class SongItem implements RecommendInterface {
   final int id;
   final int userId;
   final String coverPictureUrl;

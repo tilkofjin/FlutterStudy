@@ -1,4 +1,6 @@
 // 用户列表模型
+import 'package:fluter_demo/models/recommend_interface.dart';
+
 class UserList {
   // 包含 SongList 模型的集合
   final List<UserItem> list;
@@ -11,7 +13,7 @@ class UserList {
   }
 }
 
-class UserItem {
+class UserItem implements RecommendInterface {
   final int id;
   final String coverPictureUrl;
   final String nickname;

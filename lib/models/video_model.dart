@@ -1,3 +1,4 @@
+import 'package:fluter_demo/models/recommend_interface.dart';
 import 'package:fluter_demo/models/user_model.dart';
 
 class VideoList {
@@ -10,7 +11,7 @@ class VideoList {
   }
 }
 
-class VideoItem {
+class VideoItem implements RecommendInterface {
   final int id;
   final int userId;
   final String coverPictureUrl;

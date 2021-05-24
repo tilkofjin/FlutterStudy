@@ -1,3 +1,4 @@
+import 'package:fluter_demo/models/recommend_interface.dart';
 import 'package:fluter_demo/models/user_model.dart';
 import 'user_model.dart';
 
@@ -14,7 +15,7 @@ class ArticleList {
 }
 
 // 文章每项 - 详情模型
-class ArticleItem {
+class ArticleItem implements RecommendInterface {
   final int id;
   final int userId;
   final List coverUrlList;
