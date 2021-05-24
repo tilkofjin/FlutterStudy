@@ -42,7 +42,7 @@ class _RecommendPageState extends State<RecommendPage>
       // 获取数据
       List<dynamic> result = await RecommendService.getRecommends(page: page);
       print('RecommendService$result');
-      List<RecommendInterface>? recommendList = result
+      List<RecommendInterface> recommendList = result
           .map((item) {
             if (item['songEntity'] != null) {
               return SongItem.fromJson(item['songEntity']);
