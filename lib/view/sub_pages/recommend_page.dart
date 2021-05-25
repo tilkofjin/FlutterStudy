@@ -41,21 +41,20 @@ class _RecommendPageState extends State<RecommendPage>
     try {
       // 获取数据
       List<dynamic> result = await RecommendService.getRecommends(page: page);
-      print('RecommendService$result');
       List<RecommendInterface> recommendList = result
           .map((item) {
             if (item['songEntity'] != null) {
               return SongItem.fromJson(item['songEntity']);
-            } else if (item['videoEntity'] != null) {
-              return VideoItem.fromJson(item['videoEntity']);
             } else if (item['articleEntity'] != null) {
               return ArticleItem.fromJson(item['articleEntity']);
+            } else if (item['videoEntity'] != null) {
+              return VideoItem.fromJson(item['videoEntity']);
             }
           })
-          .cast<RecommendInterface>()
-          .toList();
+          .takeWhile((val) => val != null)
+          .toList()
+          .cast<RecommendInterface>();
 
-      // 将数据转为实体类
       setState(() {
         page++;
         if (isPush) {
@@ -79,7 +78,7 @@ class _RecommendPageState extends State<RecommendPage>
   // 下拉刷新
   Future _onRefresh() async {
     page = 1;
-    await _getRecommends(isPush: true);
+    await _getRecommends();
     // 完成刷新
     _easyRefreshController.finishRefresh();
     // 重置加载状态
@@ -107,7 +106,7 @@ class _RecommendPageState extends State<RecommendPage>
       child: ListView.builder(
         itemCount: _recommendList.length,
         itemBuilder: (BuildContext context, int index) {
-          RecommendInterface widgetItem = _recommendList[index];
+          RecommendInterface? widgetItem = _recommendList[index];
           return getWidgetByInterface(widgetItem);
         },
       ),
@@ -116,23 +115,33 @@ class _RecommendPageState extends State<RecommendPage>
 
   Widget getWidgetByInterface(RecommendInterface widgetItem) {
     if (widgetItem is SongItem) {
-      return SongCard(
+      return cloumnBox(SongCard(
         songItem: widgetItem,
-      );
+      ));
     } else if (widgetItem is ArticleItem) {
-      return ArticleCard(
+      return cloumnBox(ArticleCard(
         articleItem: widgetItem,
-      );
+      ));
     } else if (widgetItem is VideoItem) {
-      return VideoCard(
+      return cloumnBox(VideoCard(
         videoItem: widgetItem,
-      );
+      ));
     } else {
       return SizedBox.shrink(); // 空组件，且不占位
     }
   }
 
+  Widget cloumnBox(Widget card) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 8,
+        ),
+        card,
+      ],
+    );
+  }
+
   @override
-  // 默认切换使用缓存，不重新请求
   bool get wantKeepAlive => true;
 }
