@@ -54,7 +54,7 @@ class _RecommendPageState extends State<RecommendPage>
           .takeWhile((val) => val != null)
           .toList()
           .cast<RecommendInterface>();
-
+      print('recommendList-------------->$recommendList');
       setState(() {
         page++;
         if (isPush) {

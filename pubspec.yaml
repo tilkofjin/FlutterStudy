@@ -37,7 +37,8 @@ dev_dependencies:
   dio: ^4.0.0
   # 下拉刷新插件
   flutter_easyrefresh: ^2.2.1
-
+  # 懒加载功能的IndexedStack组件
+  proste_indexed_stack: ^0.2.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

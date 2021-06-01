@@ -3,6 +3,7 @@ import 'package:fluter_demo/view/root_pages/home_page.dart';
 import 'package:fluter_demo/view/root_pages/music_page.dart';
 import 'package:fluter_demo/view/root_pages/profile.dart';
 import 'package:fluter_demo/view/root_pages/tiny_video.dart';
+import 'package:proste_indexed_stack/proste_indexed_stack.dart';
 import 'package:flutter/material.dart';
 
 const Map<String, String> _bottomNames = {
@@ -26,12 +27,22 @@ class _RootPageState extends State<RootPage> {
   // 底部导航集合
   final List<BottomNavigationBarItem> _bottomNavBarList = [];
   // 页面集合
-  final List<Widget> _pages = [
-    HomePage(),
-    MusicPage(),
-    Container(),
-    TinyVideoPage(),
-    ProfilePage(),
+  final List<IndexedStackChild> _pages = [
+    IndexedStackChild(
+      child: HomePage(),
+    ),
+    IndexedStackChild(
+      child: MusicPage(),
+    ),
+    IndexedStackChild(
+      child: Container(),
+    ),
+    IndexedStackChild(
+      child: TinyVideoPage(),
+    ),
+    IndexedStackChild(
+      child: ProfilePage(),
+    ),
   ];
 
   @override
@@ -57,7 +68,11 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: ProsteIndexedStack(
+        // 缓存加载页面
+        index: _currentIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomNavBarList,
         currentIndex: _currentIndex,
